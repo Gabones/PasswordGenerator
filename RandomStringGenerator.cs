@@ -10,7 +10,14 @@ public class RandomStringGenerator
     private static readonly string _numbers = "0123456789";
     private static readonly string _special = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
 
-    public static string GenerateRandomString(int length, string startsWith, bool useUppercase = true, bool useLowercase = true, bool useNumbers = true, bool useSpecialCharacters = true)
+    public static string GenerateRandomString(
+        int length,
+        string startsWith,
+        bool useUppercase,
+        bool useLowercase,
+        bool useNumbers,
+        bool useSpecialCharacters
+    )
     {
         var characterSet = new StringBuilder();
         var result = new StringBuilder(length);

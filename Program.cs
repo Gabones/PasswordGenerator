@@ -30,15 +30,25 @@ class Program
         }
 
         int length = 12;
-        if (int.TryParse(args[0], out int consoleLength))
+        if (args.Length > 0 && int.TryParse(args[0], out int consoleLength))
             length = consoleLength;
 
-        string startsWith = args[1].StartsWith("--") ? "" : args[1];
+        string startsWith = "";
+        if (args.Length > 0)
+            startsWith = args[1].StartsWith("--") ? "" : args[1];
 
         bool useUppercase = args.Any(s => s == "--useUppercase");
         bool useLowercase = args.Any(s => s == "--useLowercase");
         bool useNumbers = args.Any(s => s == "--useNumbers");
         bool useSpecialCharacters = args.Any(s => s == "--useSpecialCharacters");
+
+        if (args.Any(s => s == "--useAll"))
+        {
+            useUppercase = true;
+            useLowercase = true;
+            useNumbers = true;
+            useSpecialCharacters = true;
+        }
 
         string randomString = RandomStringGenerator.GenerateRandomString(
             length,
@@ -48,6 +58,7 @@ class Program
             useNumbers: useNumbers,
             useSpecialCharacters: useSpecialCharacters
         );
+
         Console.WriteLine(randomString);
     }
 }
